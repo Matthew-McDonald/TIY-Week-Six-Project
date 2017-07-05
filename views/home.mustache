@@ -6,28 +6,41 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+    <header>
+      <img src="images/chat-icon2.svg" alt="" class="icon">
+      <h1>Gabble</h1>
+    </header>
 
-    <h1>Welcome,</h1>{{currentUse}}
+<div class="content">
+
+    <h1 class="welcome-banner">Welcome,</h1>{{#login}}{{displayname}}{{/login}}
+
+<div class="grid-home">
+<div class="grid-one">
 
     <h4>Start a Gab!</h4>
-
-    <textarea name="message" form="gabform" placeholder="Gabble gabble gabble....."></textarea>
+    <textarea name="message" form="gabform" maxlength="140" placeholder="Gabble gabble gabble....."></textarea>
     <form class="" action="/" method="post" id='gabform'>
       <input type="submit">
     </form>
-
-
+</div>
+<div class="grid-two">
     <h3>Messages:</h3>
-    <!--add list of messages by date-->
-    <ul>
+    <ul class = "messagelist">
       {{#messages}}
 
-        <li>{{textcontent}} -- {{login.displayname}}</li>
+        <li class ="messageitem">{{textcontent}} -- {{login.displayname}}</li>
 
       {{/messages}}
     </ul>
+</div>
+</div>
+<p class="logoutButton"><a href='/logout'>Log Out</a>
+</div>
 
-
+<footer>
+  <img src="images/chat-icon2.svg" alt="" class="footericon">
+</footer>
 
   </body>
 </html>

@@ -1,7 +1,88 @@
-body {
+/* NORMALIZATION */
+*, *:before, *after {
+  box-sizing: border-box;
+}
+
+html {
+  padding:none;
+}
+
+/*.content {
+  text-align: center;
+}*/
+
+.welcome-banner {
   text-align: center;
 }
 
 ul {
   list-style: none;
+}
+
+header {
+  background-color: #19CF86;
+  display: grid;
+  grid-template-columns: .1fr 1.9fr;
+  width: 100vw;
+  height: 7vw;
+  margin-top: -10px;
+  margin-left: -10px;
+}
+.icon {
+  width: 5vw;
+  height: 5vw;
+  margin:auto;
+  -webkit-filter: invert(100%);
+  padding-left: 10px;
+}
+
+footer {
+  background-color: #19CF86;
+  width: 100vw;
+  height: 5vw;
+  text-align: center;
+  margin-left: -10px;
+  position:absolute;
+  bottom:0;
+}
+
+.footericon {
+  width: 3vw;
+  height: 3vw;
+  margin:auto;
+  margin-top: 10px;
+  -webkit-filter: invert(100%);
+}
+
+header h1 {
+  width: 90vw;
+  color: white;
+  margin: auto;
+}
+.grid-home {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+}
+
+.messagelist {
+  width: 30vw;
+  height: 15vw;
+  overflow: auto;
+  z-index: 1;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+}
+
+textarea {
+  width: 30vw;
+  height: 15vw;
+}
+
+.logoutButton {
+  text-align: center;
+  vertical-align: baseline;
+  /*position:absolute;
+  bottom:0;*/
 }
