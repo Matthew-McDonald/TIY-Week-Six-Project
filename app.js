@@ -37,12 +37,18 @@ app.get('/', function(req, res) {
         username: req.session.username
       }
     }).then(function(currentUser) {
-      models.messagetable.findAll().then(function(textcontent){ res.render('home', {messages: textcontent, user: currentUser})
+      models.messagetable.findAll({
+
+        include: [
+          {
+            model: models.logintable,
+            as: 'login'
+          }
+        ]
+
+      }).then(function(textcontent){ res.render('home', {messages: textcontent, user: currentUser})
       })
-      // var currentUse = models.logintable.findOne({
-      //   where: {
-      //     displayname: req.session.displayname
-      //   }})
+
     })
   } else {
     res.redirect('/login')

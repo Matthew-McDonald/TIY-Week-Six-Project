@@ -21,7 +21,9 @@
     <!--add list of messages by date-->
     <ul>
       {{#messages}}
-        <li>{{textcontent}} {{userid}}</li>
+
+        <li>{{textcontent}} -- {{login.displayname}}</li>
+
       {{/messages}}
     </ul>
 
