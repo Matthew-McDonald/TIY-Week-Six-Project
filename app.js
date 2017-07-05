@@ -1,48 +1,113 @@
 const express = require('express');
-const mustacheExpress = require('mustache-express');
-const models = require('./models');
-const expressValidator = require('express-validator')
 const bodyParser = require('body-parser');
-const session = require('express-session')
+const expressValidator = require('express-validator');
+const session = require('express-session');
+const path = require('path');
+const mustacheExpress = require('mustache-express');
+const models = require("./models");
 
 const app = express();
 
 app.engine('mustache', mustacheExpress());
 app.set('views', './views');
 app.set('view engine', 'mustache');
-app.use(express.static('public'));
+app.use(express.static('./public'));;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 //'extended: false' parses strings and arrays.
 //'extended: true' parses nested objects
+
 app.use(expressValidator());
 
+//STARTING SESSIONS
+
+app.use(session({
+  secret: 'chocolate dog',
+  resave: false,
+  saveUninitialized: true
+}));
+
+//HOME GETS AND POSTS***************************************
 
 app.get('/', function(req, res) {
-  res.render('welcome2gabble');
+  if (req.session && req.session.authenticated) {
+    var user = models.logintable.findOne({
+      where: {
+        username: req.session.username
+      }
+    }).then(function(currentUser) {
+      models.messagetable.findAll().then(function(textcontent){ res.render('home', {messages: textcontent, user: currentUser})
+      })
+      // var currentUse = models.logintable.findOne({
+      //   where: {
+      //     displayname: req.session.displayname
+      //   }})
+    })
+  } else {
+    res.redirect('/login')
+  }
 })
 
-app.get('/signup', function(req, res){
+app.post('/', function(req, res) {
+  let username = req.body.username;
+  let password = req.body.password;
+
+  models.logintable.findOne({
+    where: {
+      username: username
+    }
+  }).then(user => {
+    if (user.password == password) {
+      req.session.username = username;
+      req.session.authenticated = true;
+      res.redirect('/');
+    } else {
+      res.redirect('/login');
+    }
+  })
+  const message = models.messagetable.build({
+    textcontent: req.body.message
+  })
+  message.save().then(function(message) {
+    res.redirect('/')
+  });
+
+})
+
+//LOGIN GETS AND POSTS****************************************
+
+app.get('/login', function(req, res) {
+  res.render('welcome2gabble')
+})
+
+//SIGNUP GETS AND POSTS*************************************
+
+app.get('/signup', function(req, res) {
   res.render('signup');
 })
 
 app.post('/signup', function(req, res) {
-  const login = models.logintable.build({
-    username:req.body.name,
-    password:req.body.password,
-    displayname:req.body.displayname,
+  const user = models.logintable.build({
+    name: req.body.displayname,
+    username: req.body.username,
+    password: req.body.password
   })
-  console.log(login);
-  login.save();
-  res.redirect('/');
+
+  user.save().then(function(user) {
+    req.session.username = user.username;
+    req.session.authenticated = true;
+    res.redirect('/')
+  })
 })
 
+//APP LISTEN **********************************************
+
 app.listen(3000, function () {
-  console.log('Successfully started express application!');
+  console.log('Hey! No mistakes!');
 });
 
-//add displayname column in users(for display purposes)"Hello Matt".
+
 //Create session for logins
 //Create authentication for checking the database for users data
 //create homepage for if you visit '/' it recognizes you are logged in and redirects you to homepage, if not logged in, redirects you to log in page
