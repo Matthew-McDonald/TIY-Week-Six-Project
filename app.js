@@ -28,15 +28,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(expressValidator());
 
-
-
 //HOME GETS AND POSTS***************************************
 
 app.get('/', function(req, res) {
   if (req.session && req.session.authenticated) {
+    // var activeUser = req.session.activeUser
     var user = models.logintable.findOne({
       where: {
         username: req.session.username,
+        // id: req.session.activeUser,
+        // password: req.session.password,
         // include: displayname
       }
     }).then(function(currentUser) {
@@ -49,13 +50,15 @@ app.get('/', function(req, res) {
           }
         ]
 
-      }).then(function(textcontent, login, displayname){ res.render('home', {messages: textcontent, user: currentUser, login: displayname})
+      }).then(function(textcontent, login, displayname){ res.render('home', {messages: textcontent, user: currentUser, login: user.displayname})
       })
 
     })
   } else {
     res.redirect('/login')
   }
+  // var activeUser = req.session.activeUser
+  // console.log(activeUser)
 })
 
 app.post('/', function(req, res) {
@@ -75,14 +78,26 @@ app.post('/', function(req, res) {
   //     res.redirect('/login');
   //   }
   // })
+  // var user = models.logintable.findOne({
+  //   where: {username: req.session.username},
+  //   attributes: ['id']
+  //
+  // })
+// var activeUser = req.session.activeUser
+// console.log(activeUser);
+// var activeUser = req.session.activeUser
+// console.log(activeUser)
+
+  console.log("Making a message")
   const message = models.messagetable.build({
     textcontent: req.body.message,
-    userid: req.session.userid
+    // userid: activeUser.id, //idk
   })
+
   message.save().then(function(message) {
     res.redirect('/')
   });
-
+console.log("part 2")
 })
 
 //LOGIN GETS AND POSTS****************************************
@@ -93,6 +108,8 @@ app.get('/login', function(req, res) {
 app.post('/login', function(req, res) {
   let username = req.body.username;
   let password = req.body.password;
+  let displayname = req.body.displayname;
+  // var activeUser;
   models.logintable.findOne({
     where: {
       username: username
@@ -100,6 +117,8 @@ app.post('/login', function(req, res) {
   }).then(user => {
     if (user.password == password) {
       req.session.username = username;
+      req.session.displayname = displayname;
+      // req.session.id = activeUser;
       req.session.authenticated = true;
       res.redirect('/');
     } else {

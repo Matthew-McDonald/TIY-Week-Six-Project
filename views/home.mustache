@@ -11,32 +11,29 @@
       <h1>Gabble</h1>
     </header>
 
-<div class="content">
-
-    <h1 class="welcome-banner">Welcome,</h1>{{#login}}{{displayname}}{{/login}}
-
 <div class="grid-home">
 <div class="grid-one">
+  <h1 class="welcome-banner">Welcome, {{user.displayname}}</h1>
 
-    <h4>Start a Gab!</h4>
+    <h3>Start a Gab!</h3>
     <textarea name="message" form="gabform" maxlength="140" placeholder="Gabble gabble gabble....."></textarea>
     <form class="" action="/" method="post" id='gabform'>
-      <input type="submit">
+      <input type="submit" placeholder="Gab!">
     </form>
+    <p class="logoutButton"><a href='/logout'>Log Out</a>
 </div>
 <div class="grid-two">
-    <h3>Messages:</h3>
+    <h3>Recent Gabs:</h3>
     <ul class = "messagelist">
       {{#messages}}
 
-        <li class ="messageitem">{{textcontent}} -- {{login.displayname}}</li>
+        <li class ="messageitem"><span class = "messageContent">{{textcontent}}    <span class= "message-username">@{{login.username}}</span></span><span class="nameContent">- {{login.displayname}}<input type="button" name="Like" value="Like"><input type="button" name="Delete" value="Delete"></span></li>
 
       {{/messages}}
     </ul>
 </div>
 </div>
-<p class="logoutButton"><a href='/logout'>Log Out</a>
-</div>
+
 
 <footer>
   <img src="images/chat-icon2.svg" alt="" class="footericon">

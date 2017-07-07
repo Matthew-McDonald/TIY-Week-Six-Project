@@ -7,13 +7,13 @@ html {
   padding:none;
 }
 
-/*.content {
-  text-align: center;
-}*/
-
-.welcome-banner {
+.content {
   text-align: center;
 }
+
+/*.welcome-banner {
+  text-align: center;
+}*/
 
 ul {
   list-style: none;
@@ -67,17 +67,48 @@ header h1 {
 
 .messagelist {
   width: 30vw;
-  height: 15vw;
+  height: 30vw;
   overflow: auto;
   z-index: 1;
   position: relative;
   border: 1px solid rgba(0, 0, 0, 0.4);
   border-radius: 10px;
+  padding: 5px;
+  background-color: #A4F4D4;
+}
+
+.messageitem {
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  margin: 2px;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  background-color: white;
+}
+
+.messageContent {
+  text-transform: capitalize;
+  font-style: italic;
+  font-size: 16pt;
+  padding-left: 3px;
+  padding-top: 3px;
+}
+.nameContent {
+  font-size: 10pt;
+  text-align: right;
+  padding-right: 4px;
+  padding-top: 10px;
+}
+
+.message-username {
+  font-size: 10pt;
 }
 
 textarea {
   width: 30vw;
   height: 15vw;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
 }
 
 .logoutButton {
