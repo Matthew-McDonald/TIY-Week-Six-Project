@@ -114,6 +114,7 @@ textarea {
   height: 15vw;
   border: 1px solid rgba(0, 0, 0, 0.4);
   border-radius: 10px;
+  font-size: 16pt;
 }
 
 .logoutButton {
@@ -140,5 +141,5 @@ textarea {
 
 .welcomeGabble {
   text-align: center;
-  
+
 }
