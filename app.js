@@ -5,6 +5,7 @@ const session = require('express-session');
 const path = require('path');
 const mustacheExpress = require('mustache-express');
 const models = require("./models");
+// const routes = require("./routes.js");
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //'extended: true' parses nested objects
 
 app.use(expressValidator());
+// app.use(routes);
 
 //HOME GETS AND POSTS***************************************
 
@@ -62,29 +64,6 @@ app.get('/', function(req, res) {
 })
 
 app.post('/', function(req, res) {
-  // let username = req.body.username;
-  // let password = req.body.password;
-  //
-  // models.logintable.findOne({
-  //   where: {
-  //     username: username
-  //   }
-  // }).then(user => {
-  //   if (user.password == password) {
-  //     req.session.username = username;
-  //     req.session.authenticated = true;
-  //     res.redirect('/');
-  //   } else {
-  //     res.redirect('/login');
-  //   }
-  // })
-  // var user = models.logintable.findOne({
-  //   where: {username: req.session.username},
-  //   attributes: ['id']
-  //
-  // })
-// var activeUser = req.session.activeUser
-// console.log(activeUser);
 // var activeUser = req.session.activeUser
 // console.log(activeUser)
 
@@ -156,11 +135,42 @@ app.post('/signup', function(req, res) {
   })
 })
 
+//DELETE POST**********************************
+
+app.post('/delete', function (req, res){
+    console.log('deleting');
+    console.log(req.body);
+    console.log(req.body.deletebuttonid);
+    models.messagetable.destroy({
+        where: {
+            id: req.body.deletebuttonid
+        }
+    }).then(function(postnow){
+        res.redirect('/');
+    })
+})
+
+//LIKE POST ***********************************
+
+app.post('/like', function (req, res) {
+  res.send('This is not a feature yet');
+})
+
 //APP LISTEN **********************************************
 
 app.listen(3000, function () {
   console.log('Hey! No mistakes!');
 });
+
+
+
+//New list------------------
+//Add associations for likes
+//Add like function
+//add message association for new messages
+//split files into routes
+
+
 
 
 //Create session for logins

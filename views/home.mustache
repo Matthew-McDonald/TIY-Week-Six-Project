@@ -27,7 +27,16 @@
     <ul class = "messagelist">
       {{#messages}}
 
-        <li class ="messageitem"><span class = "messageContent">{{textcontent}}    <span class= "message-username">@{{login.username}}</span></span><span class="nameContent">- {{login.displayname}}<input type="button" name="Like" value="Like"><input type="button" name="Delete" value="Delete"></span></li>
+        <li class ="messageitem"><span class = "messageContent">{{textcontent}}    <span class= "message-username">@{{login.username}}</span></span><span class="nameContent">- {{login.displayname}}
+          <form class="" action="/delete" method="post">
+            <input type="hidden" name="deletebuttonid" value="{{id}}">
+            <input type="submit" name="deletebutton" value="Delete">
+          </form>
+        </span>
+        <form class="" action="/like" method="post">
+          <input type="hidden" name="likebuttonid" value="{{id}}">
+          <input type="submit" name="likebutton" value="Like">
+        </form>
 
       {{/messages}}
     </ul>

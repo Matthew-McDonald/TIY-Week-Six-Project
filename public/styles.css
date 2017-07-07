@@ -9,6 +9,11 @@ html {
 
 .content {
   text-align: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-self: center;
+  margin-top: 15vh;
+
 }
 
 /*.welcome-banner {
@@ -116,4 +121,24 @@ textarea {
   vertical-align: baseline;
   /*position:absolute;
   bottom:0;*/
+}
+
+#password {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 16pt;
+  border-radius: 1px;
+}
+#usernameField {
+  font-size: 16pt;
+  border-radius: 1px;
+
+}
+#submitButton {
+  width: 50px;
+}
+
+.welcomeGabble {
+  text-align: center;
+  
 }
