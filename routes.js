@@ -11,13 +11,9 @@ router.use(bodyParser.urlencoded({ extended: false }));
 
 router.get('/', function(req, res) {
   if (req.session && req.session.authenticated) {
-    // var activeUser = req.session.activeUser
     var user = models.logintable.findOne({
       where: {
         username: req.session.username,
-        // id: req.session.activeUser,
-        // password: req.session.password,
-        // include: displayname
       }
     }).then(function(currentUser) {
       models.messagetable.findAll({
@@ -31,19 +27,13 @@ router.get('/', function(req, res) {
 
       }).then(function(textcontent, login, displayname){ res.render('home', {messages: textcontent, user: currentUser, login: user.displayname})
       })
-
     })
   } else {
     res.redirect('/login')
   }
-
-  // var activeUser = req.session.activeUser
-  // console.log(activeUser)
 })
 
 router.post('/', function(req, res) {
-// var activeUser = req.session.activeUser
-// console.log(activeUser)
 models.logintable.findOne({
   where: {
     username: req.session.username
@@ -53,12 +43,10 @@ models.logintable.findOne({
     textcontent: req.body.message,
     userid: user.id
   })
-    console.log(user.id);
     message.save()
     res.redirect('/')
 
   })
-console.log("part 2")
 })
 
 //LOGIN GETS AND POSTS****************************************
@@ -70,7 +58,6 @@ router.post('/login', function(req, res) {
   let username = req.body.username;
   let password = req.body.password;
   let displayname = req.body.displayname;
-  // var activeUser;
   models.logintable.findOne({
     where: {
       username: username
@@ -79,7 +66,6 @@ router.post('/login', function(req, res) {
     if (user.password == password) {
       req.session.username = username;
       req.session.displayname = displayname;
-      // req.session.id = activeUser;
       req.session.authenticated = true;
       res.redirect('/');
     } else {
@@ -87,7 +73,6 @@ router.post('/login', function(req, res) {
     }
   })
 })
-
 
 //LOGOUT GETS AND POSTS *************************************
 
@@ -137,7 +122,20 @@ router.post('/delete', function (req, res){
 //LIKE POST ***********************************
 
 router.post('/like', function (req, res) {
-  res.send('This is not a feature yet');
-})
+  // models.logintable.findOne({
+  //   where: {
+  //     username: req.session.username
+  //     }
+  // }).then(function(user) {
+  //   let newLike = models.liketable.build({
+  //     userid : user.id,
+  //     postid : req.body.likebutton
+  //   })
+  //   newLike.save();
+  //   res.redirect('/');
+  // })
+  res.send('If you want to like something, go to Twitter.')
+});
+
 
 module.exports = router;
