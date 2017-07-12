@@ -33,9 +33,7 @@ app.use(routes);
 
 
 
-app.listen(3000, function () {
-  console.log('Hey! No mistakes!');
-});
+app.listen(process.env.PORT || 5000)
 
 
 
