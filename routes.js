@@ -52,7 +52,7 @@ models.logintable.findOne({
 //LOGIN GETS AND POSTS****************************************
 
 router.get('/login', function(req, res) {
-  res.render('welcome2gabble')
+  res.render('Welcome2Gabble')
 })
 router.post('/login', function(req, res) {
   let username = req.body.username;
