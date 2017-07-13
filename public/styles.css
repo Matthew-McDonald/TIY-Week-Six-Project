@@ -3,26 +3,23 @@
   box-sizing: border-box;
 }
 
+/****************BEGIN CSS*************************/
+
 html {
   padding:none;
 }
-
 .content {
   text-align: center;
   display: grid;
   grid-template-columns: 1fr;
   align-self: center;
   margin-top: 15vh;
-
 }
-
-/*.welcome-banner {
-  text-align: center;
-}*/
-
 ul {
   list-style: none;
 }
+
+/***************HEADER AND FOOTER*******************/
 
 header {
   background-color: #19CF86;
@@ -33,6 +30,11 @@ header {
   margin-top: -10px;
   margin-left: -10px;
 }
+header h1 {
+  width: 90vw;
+  color: white;
+  margin: auto;
+}
 .icon {
   width: 5vw;
   height: 5vw;
@@ -40,7 +42,6 @@ header {
   -webkit-filter: invert(100%);
   padding-left: 10px;
 }
-
 footer {
   background-color: #19CF86;
   width: 100vw;
@@ -50,7 +51,6 @@ footer {
   position:absolute;
   bottom:0;
 }
-
 .footericon {
   width: 3vw;
   height: 3vw;
@@ -59,17 +59,13 @@ footer {
   -webkit-filter: invert(100%);
 }
 
-header h1 {
-  width: 90vw;
-  color: white;
-  margin: auto;
-}
+/****************HOME PAGE******************/
+
 .grid-home {
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-items: center;
 }
-
 .messagelist {
   width: 30vw;
   height: 30vw;
@@ -81,7 +77,6 @@ header h1 {
   padding: 5px;
   background-color: #A4F4D4;
 }
-
 .messageitem {
   border: 1px solid rgba(0, 0, 0, 0.4);
   border-radius: 5px;
@@ -90,7 +85,6 @@ header h1 {
   grid-template-rows: 1fr 1fr;
   background-color: white;
 }
-
 .messageContent {
   text-transform: capitalize;
   font-style: italic;
@@ -104,11 +98,9 @@ header h1 {
   padding-right: 4px;
   padding-top: 10px;
 }
-
 .message-username {
   font-size: 10pt;
 }
-
 textarea {
   width: 30vw;
   height: 15vw;
@@ -116,13 +108,12 @@ textarea {
   border-radius: 10px;
   font-size: 16pt;
 }
-
 .logoutButton {
   text-align: center;
   vertical-align: baseline;
-  /*position:absolute;
-  bottom:0;*/
 }
+
+/******************WELCOME2GABBLE PAGE*********************/
 
 #password {
   margin-top: 5px;
@@ -133,15 +124,15 @@ textarea {
 #usernameField {
   font-size: 16pt;
   border-radius: 1px;
-
 }
 #submitButton {
   width: 50px;
 }
-
 .welcomeGabble {
   text-align: center;
 }
+
+/****************SIGNUP PAGE*****************/
 
 .signupform {
   font-size: 16pt;

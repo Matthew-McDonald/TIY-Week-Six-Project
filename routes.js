@@ -38,7 +38,9 @@ router.get("/", function(req, res) {
     res.redirect("/login");
   }
 });
+
 //HOME POST********************************************
+
 router.post("/", function(req, res) {
   models.logintable
     .findOne({
@@ -61,7 +63,9 @@ router.post("/", function(req, res) {
 router.get("/login", function(req, res) {
   res.render("Welcome2Gabble");
 });
+
 //LOGIN POST****************************************
+
 router.post("/login", function(req, res) {
   let username = req.body.username;
   let password = req.body.password;
@@ -99,6 +103,7 @@ router.get("/signup", function(req, res) {
 });
 
 //SIGNUP POST***************************************
+
 router.post("/signup", function(req, res) {
   const user = models.logintable.build({
     displayname: req.body.displayname,

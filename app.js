@@ -15,7 +15,6 @@ app.set("view engine", "mustache");
 app.use(express.static("./public"));
 
 //STARTING SESSIONS
-
 app.use(
   session({
     secret: "chocolate dog",
