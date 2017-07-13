@@ -141,5 +141,11 @@ textarea {
 
 .welcomeGabble {
   text-align: center;
+}
 
+.signupform {
+  font-size: 16pt;
+  border-radius: 1px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }

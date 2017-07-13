@@ -1,27 +1,30 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const expressValidator = require('express-validator');
-const session = require('express-session');
-const path = require('path');
-const mustacheExpress = require('mustache-express');
+const express = require("express");
+const bodyParser = require("body-parser");
+const expressValidator = require("express-validator");
+const session = require("express-session");
+const path = require("path");
+const mustacheExpress = require("mustache-express");
 const models = require("./models");
 const routes = require("./routes");
 
 const app = express();
 
-app.engine('mustache', mustacheExpress());
-app.set('views', './views');
-app.set('view engine', 'mustache');
-app.use(express.static('./public'));;
+app.engine("mustache", mustacheExpress());
+app.set("views", "./views");
+app.set("view engine", "mustache");
+app.use(express.static("./public"));
 
 //STARTING SESSIONS
 
-app.use(session({
-  secret: 'chocolate dog',
-  resave: false,
-  saveUninitialized: true
-}));
+app.use(
+  session({
+    secret: "chocolate dog",
+    resave: false,
+    saveUninitialized: true
+  })
+);
 
+//Allowing bodyparser for app
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 //'extended: false' parses strings and arrays.
@@ -31,11 +34,10 @@ app.use(expressValidator());
 app.use(routes);
 
 
-
-
-app.set('port', (process.env.PORT || 5000));
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
+//Listening for either a local port of 5000, or for the hiroku hosted site
+app.set("port", process.env.PORT || 5000);
+app.listen(app.get("port"), function() {
+  console.log("Node app is running on port", app.get("port"));
 });
 
 
@@ -43,9 +45,6 @@ app.listen(app.get('port'), function() {
 //New list------------------
 //Add associations for likes
 //Add like function
-
-
-
 
 //Create session for logins
 //Create authentication for checking the database for users data
