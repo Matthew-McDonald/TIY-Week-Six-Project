@@ -36,10 +36,25 @@
               <input type="submit" name="deletebutton" value="Delete">
             </form>
           </span>
-            <form class="" action="/like" method="post">
+          <form action="/like" method="post" id="likeForm">
+              <div class="likeCount main">{{likes.length}} likes<span class="extra"><br>{{{likers}}}</span></div>
+            <input type="hidden" name="postid" value="{{id}}">
+            {{#postedByMe}}
+              <button name="delete_button" value="deletePost">Delete</button>
+            {{/postedByMe}}
+            {{^postedByMe}}
+            {{#likedByMe}}
+                <button name="unlike_button" value="unlike">Unlike</button>
+            {{/likedByMe}}
+            {{^likedByMe}}
+                <button name="like_button" value="like">Like</button>
+            {{/likedByMe}}
+            {{/postedByMe}}
+          </form>
+            <!-- <form class="" action="/like" method="post">
               <input type="hidden" name="likebuttonid" value="{{id}}">
               <input type="submit" name="likebutton" value="Like">
-            </form>
+            </form> -->
           </li>
 
       {{/messages}}

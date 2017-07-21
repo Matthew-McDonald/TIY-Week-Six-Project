@@ -139,19 +139,38 @@ router.post("/delete", function(req, res) {
 //LIKE POST ***********************************
 
 router.post("/like", function(req, res) {
-  // models.logintable.findOne({
-  //   where: {
-  //     username: req.session.username
-  //     }
-  // }).then(function(user) {
-  //   let newLike = models.liketable.build({
-  //     userid : user.id,
-  //     postid : req.body.likebutton
-  //   })
-  //   newLike.save();
-  //   res.redirect('/');
-  // })
-  res.send("If you want to like something, go to Facebook.");
+    models.liketable.findAll({
+      include: [
+        {
+          model: models.liketable,
+          as: 'likes',
+            include: [
+                {
+                  model: models.logintable,
+                  as: 'likesLogin'
+                }
+              ]
+        }
+      ]
+    }).then(function(messagetable) {
+    for (i = 0; i < messagetable.length; i++) {
+        if (messagetable[i].userId === req.session.user.id) {
+          messagetable[i].postedByMe = true;
+        }
+        let likers = "";
+        for (j = 0; j < messagetable[i].likes.length; j++) {
+            likers += messagetable[i].likes[j].user.first_name + " " + messagetable[i].likes[j].user.last_name + "<br />";
+            if (messagetable[i].likes[j].userId === req.session.user.id) {
+              messagetable[i].likedByMe = true;
+            }
+        }
+        messagetable[i].likers = likers;
+    }
+    res.render('home', {
+      userData: req.session.user,
+      feed: messagetable
+    })
+  })
 });
 
 module.exports = router;
