@@ -1,1 +1,3 @@
-This was a project called Gabble, created using Node.js, Express and Mustache. It is similiar to twitter in that a user can signup, login and post/like messages. 
+Gabble!
+
+This project was created using Node.js, Express, Mustache and uses a PostgreSQL database. It is similiar to twitter in that a user can signup, login and post/like messages. 
